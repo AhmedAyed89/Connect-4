@@ -13,12 +13,12 @@ const vsIMG = 'vs';
 
 export default class HomePage extends Sprite {
 
-	constructor() {
+	constructor () {
 		super();
 		this.renderUI();
 	}
 
-	renderUI() {
+	renderUI () {
 		this.pokeball = new Sprite.fromImage(PIXI.loader.resources[pokeballIMG].url);
 		this.vs = new Sprite.fromImage(PIXI.loader.resources[vsIMG].url);
 		this.addChild(this.pokeball);
@@ -48,7 +48,7 @@ export default class HomePage extends Sprite {
 		pokeballText.x = this.pokeball.width / 2 - pokeballText.width / 2;
 		pokeballText.y = this.pokeball.height / (3/2);
 	}
-	playButtonClickHandler(mouseData){
+	playButtonClickHandler (mouseData){
 		const arena = new Arena();
 		const gamePage = new GamePage(arena);
 		ScreenAction.set("nextScreen", gamePage);

@@ -21,7 +21,7 @@ const animOffset = 20;
 let animPosition = 0;
 
 export default class GamePage extends Sprite {
-	constructor(arena) {
+	constructor (arena) {
 		super();
 		this.arena = arena;
 		this.boundAnimationListener = this.onAnimationChangeHandler.bind(this);
@@ -32,13 +32,13 @@ export default class GamePage extends Sprite {
 		StateGame.addChangeListener(this.boundGameStateListener);
 		AnimationAction.addChangeListener(this.boundAnimationListener);
 	}
-	onAnimationChangeHandler() {
+	onAnimationChangeHandler () {
 		this.animatePiece();
 	}
-	onGameStateChangeHandler() {
+	onGameStateChangeHandler () {
 		this.arena.playAtColWithValue(StateGame.get("col"), StateGame.get("type"));
 	}
-	onPieceMouseDown(e) {
+	onPieceMouseDown (e) {
 		let playingNow = StateGame.get("type");
 		const {
 			target
@@ -59,7 +59,7 @@ export default class GamePage extends Sprite {
 		StateGame.set("col", target.col);
 		StateGame.emitChange();
 	}
-	getTextureByValue(type) {
+	getTextureByValue (type) {
 		let img;
 
 		switch (type) {
@@ -79,7 +79,7 @@ export default class GamePage extends Sprite {
 		}
 		return new Texture.fromImage(PIXI.loader.resources[img].url);
 	}
-	playWithJigglypuff(arena) {
+	playWithJigglypuff (arena) {
 		setTimeout(() => {
 			const col = Math.floor((Math.random() * ARENA_SIZE));
 			if (!arena.canPlayAt(col)) {
@@ -92,7 +92,7 @@ export default class GamePage extends Sprite {
 			StateGame.emitChange();
 		}, 800);
 	}
-	animatePiece() {
+	animatePiece () {
 		let playingNow = StateGame.get("type");
 
 		const {
@@ -142,7 +142,7 @@ export default class GamePage extends Sprite {
 		pieceSprite.y = animPosition;
 		animPosition += animOffset;
 	}
-	renderNewGame(arena) {
+	renderNewGame (arena) {
 		this.renderPIXIArena(arena);
 		const playingNow = StateGame.get('type');
 		let playerNameValue = 'Pikachu';
@@ -159,14 +159,14 @@ export default class GamePage extends Sprite {
 		this.addChild(resultText);
 		this.reset();
 	}
-	reset() {
+	reset () {
 		setTimeout(() => {
 			StateGame.removeListener(START, this.boundGameStateListener);
 			AnimationAction.removeListener(ANIMATE, this.boundAnimationListener);
 			GameAction.emitChange();
 		}, 2000);
 	}
-	renderPIXIArenaBackground(arena) {
+	renderPIXIArenaBackground (arena) {
 		for (let row = 0; row < ARENA_SIZE; row++) {
 			for (let col = 0; col < ARENA_SIZE; col++) {
 				const piece = arena.getPieceAt(row, col);
@@ -186,7 +186,7 @@ export default class GamePage extends Sprite {
 			}
 		}
 	}
-	renderPIXIArena(arena) {
+	renderPIXIArena (arena) {
 		for (let row = 0; row < ARENA_SIZE; row++) {
 			for (let col = 0; col < ARENA_SIZE; col++) {
 				const piece = arena.getPieceAt(row, col);
